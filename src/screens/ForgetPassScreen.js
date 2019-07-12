@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import { StyleSheet, View, Text, Button } from 'react-native';
 
-export default class HomeScreen extends Component {
+export default class ForgetPassScreen extends Component {
 
   static navigationOptions = {
     header: null
@@ -12,7 +12,7 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{ fontSize: 23 }}>Home Screen </Text>
+        <Text style={{ fontSize: 23 }}>Forget Password Screen </Text>
       </View>
     );
   }
