@@ -14,11 +14,11 @@ import * as WebBrowser from 'expo-web-browser';
 
 import { MonoText } from '../components/StyledText';
 
-export default class Login extends React.Component {
+export default class HomeScreen extends React.Component {
   render(){
     return(
       <View>
-        <Tex>Login</Tex>
+        <Text>Login</Text>
       </View>
     )
   }
