@@ -19,7 +19,7 @@ export default class SettingsScreen extends Component {
                             style={styles.sideMenuProfile}
                             />
                         </View>
-                        <Text style={{color:'#fff',marginTop:10}}>Admin</Text>
+                        <Text style={{color:'#fff',marginTop:12}}>Admin</Text>
                 </ImageBackground>
 
                 <View style={styles.bottom}>
