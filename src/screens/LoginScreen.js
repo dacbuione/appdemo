@@ -70,7 +70,7 @@ export default class LoginScreen extends React.Component {
                                 />
                             </View>
 
-                            <View style={styles.pickerLanguage}>
+                            {/* <View style={styles.pickerLanguage}>
                                 <Picker style={styles.pickerItem}
                                     mode="dropdown"
                                     selectedValue={this.state.language}
@@ -80,7 +80,7 @@ export default class LoginScreen extends React.Component {
                                     <Picker.Item label="DE Deutsch" />
                                     <Picker.Item label="ES Spanish" />
                                 </Picker>
-                            </View>
+                            </View> */}
 
                             <View>
                                 <TouchableOpacity
