@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity , StyleSheet, ImageBackground, Image} from 'react-native';
+
 import {Card, CardItem, Text } from 'native-base';
-const headerDrawer = require('../assets/images/profile.jpg');
-import Icon from 'react-native-vector-icons/FontAwesome';
+
+import { View, TouchableOpacity , StyleSheet, ImageBackground, Image} from 'react-native';
+
 import { ScrollView } from 'react-native-gesture-handler';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+const headerDrawer = require('../assets/images/profile.jpg');
+
 // const TOKEN = 'TOKEN';
-export default class SettingsScreen extends Component {
+export default class ProfileScreen extends Component {
     
     render() {
         return (

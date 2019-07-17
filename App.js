@@ -4,8 +4,7 @@ import { View, Text } from 'react-native';
 
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-
-import MainDrawerBar from './src/navigation/MainDrawerBar';
+import MainTabBar from './src/navigation/MainTabBar';
 import ForgetPassScreen from './src/screens/ForgetPassScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SplashScreen from './src/screens/SplashScreen';
@@ -22,7 +21,7 @@ const login = createStackNavigator({
 
 const main = createStackNavigator({
     Main: {
-        screen: MainDrawerBar,
+        screen: MainTabBar,
         navigationOptions: ({ navigation }) => ({ header: null })
     }
 },

@@ -7,6 +7,7 @@ import {
     View,
     Text,
     TextInput,
+    Image,
     Picker,
     Dimensions,
     TouchableOpacity,
@@ -17,6 +18,7 @@ import {
 
 const { width: WIDTH } = Dimensions.get('window');
 const bgImage = require('../assets/images/bg.jpg');
+const logo = require('../assets/images/IRTECH.png');
 
 export default class LoginScreen extends React.Component {
 
@@ -37,7 +39,7 @@ export default class LoginScreen extends React.Component {
                         <View style={styles.container}>
 
                             <View style={styles.logoContainer}>
-                                <Text style={styles.logoText}>Customer Portal</Text>
+                                <Image source={logo} style={styles.logo} />
                             </View>
 
                             <View style={styles.inputContainer}>
@@ -85,9 +87,9 @@ export default class LoginScreen extends React.Component {
                             <View>
                                 <TouchableOpacity
                                     style={styles.buttonLogin}
-                                    onPress={()=>{this.props.navigation.navigate('Main')}}
+                                    onPress={() => { this.props.navigation.navigate('Main') }}
                                 >
-                                    <Text style={styles.textLogin}> Login </Text>
+                                    <Text style={styles.textLogin}> Đăng nhập </Text>
                                 </TouchableOpacity>
                             </View>
 
@@ -95,7 +97,7 @@ export default class LoginScreen extends React.Component {
                                 <TouchableOpacity
                                     onPress={() => { this.props.navigation.navigate('ForgetPass') }}
                                 >
-                                    <Text style={styles.textForgetPass}>Forget Pasword?</Text>
+                                    <Text style={styles.textForgetPass}>Quên mật khẩu?</Text>
                                 </TouchableOpacity>
                             </View>
 
@@ -122,6 +124,11 @@ const styles = StyleSheet.create({
     },
     logoContainer: {
         alignItems: 'center',
+        marginBottom: 70
+    },
+    logo: {
+        width: 150,
+        height: 90,
     },
     logoText: {
         fontSize: 20,

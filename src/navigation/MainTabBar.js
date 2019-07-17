@@ -6,16 +6,18 @@ import { createBottomTabNavigator, createStackNavigator, createDrawerNavigator, 
 
 import HeaderButton from '../components/HeaderButtonNavigation';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingScreen from '../screens/SettingsScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+import SettingScreen from '../screens/SettingScreen';
 
 import SideBarMenu from './SideBarMenu';
 
+
+//khai báo màn hình của sidebar
 const Home = createStackNavigator({
     Home: {
         screen: HomeScreen,
         navigationOptions: ({ navigation }) => ({
-            title: 'Home',
+            title: 'Trang chủ',
             headerLeft: <HeaderButton navigationProps={navigation} />,
             // headerTintColor: 'black',
             headerStyle: {
@@ -27,11 +29,11 @@ const Home = createStackNavigator({
     }
 });
 
-const Link = createStackNavigator({
-    Link: {
-        screen: LinksScreen,
+const Setting = createStackNavigator({
+    Setting: {
+        screen: SettingScreen,
         navigationOptions: ({ navigation }) => ({
-            title: 'Chat',
+            title: 'Cài đặt',
             headerLeft: <HeaderButton navigationProps={navigation} />,
             // headerTintColor: '#8B1A1A',
             headerStyle: {
@@ -44,11 +46,11 @@ const Link = createStackNavigator({
 });
 
 
-const Setting = createStackNavigator({
-    Setting: {
-        screen: SettingScreen,
+const Profile = createStackNavigator({
+    Profile: {
+        screen: ProfileScreen,
         navigationOptions: ({ navigation }) => ({
-            title: 'Setting',
+            title: 'Tôi',
             headerLeft: <HeaderButton navigationProps={navigation} />,
             // headerTintColor: '#8B1A1A',
             headerStyle: {
@@ -60,12 +62,13 @@ const Setting = createStackNavigator({
     },
 });
 
-
+//màn hình của tabbar
 const tabNav = createBottomTabNavigator({
     Home: {
         screen: Home,
         navigationOptions: () => ({
             gesturesEnabled: false,
+            title: 'Trang chủ',
             tabBarIcon: ({ tintColor }) => {
                 return (
                     <Ionicons
@@ -77,14 +80,15 @@ const tabNav = createBottomTabNavigator({
             }
         })
     },
-    Link: {
-        screen: Link,
+    Setting: {
+        screen: Setting,
         navigationOptions: () => ({
             gesturesEnabled: false,
+            title: 'Cài đặt',
             tabBarIcon: ({ tintColor }) => {
                 return (
                     <Ionicons
-                        name='ios-chatboxes'
+                        name='ios-settings'
                         size={28}
                         color={tintColor}
                     />
@@ -92,14 +96,15 @@ const tabNav = createBottomTabNavigator({
             }
         })
     },
-    Setting: {
-        screen: Setting,
+    Account: {
+        screen: Profile,
         navigationOptions: () => ({
             gesturesEnabled: false,
+            title: 'Tôi',
             tabBarIcon: ({ tintColor }) => {
                 return (
                     <Ionicons
-                        name='ios-chatboxes'
+                        name='ios-person'
                         size={28}
                         color={tintColor}
                     />
@@ -113,10 +118,10 @@ const tabNav = createBottomTabNavigator({
         // swipeEnabled: false,
         tabBarOptions: {
             style: {
-                backgroundColor: '#556270',
+                backgroundColor: 'white',
             },
-            activeTintColor: 'rgba(255, 255, 255, 0.9)',
-            inactiveTintColor: '#008B8B',
+            activeTintColor: '#008B8B',
+            inactiveTintColor: '#c0c0c0',
         }
     })
 
@@ -129,11 +134,12 @@ const stackNavigation = createStackNavigator({
     });
 
 
-    
+
 const drawerNavigation = createDrawerNavigator({
     Home: {
         screen: stackNavigation,
         navigationOptions: () => ({
+            title: 'Trang chủ',
             drawerIcon: ({ tintColor }) => {
                 return (
                     <Ionicons
@@ -148,6 +154,7 @@ const drawerNavigation = createDrawerNavigator({
     Setting: {
         screen: Setting,
         navigationOptions: () => ({
+            title: 'Cài đặt',
             drawerIcon: ({ tintColor }) => {
                 return (
                     <Ionicons
@@ -159,13 +166,14 @@ const drawerNavigation = createDrawerNavigator({
             }
         })
     },
-    Link: {
-        screen: Link,
+    Account: {
+        screen: Profile,
         navigationOptions: () => ({
+            title: 'Tôi',
             drawerIcon: ({ tintColor }) => {
                 return (
                     <Ionicons
-                        name='ios-help-circle'
+                        name='ios-person'
                         size={28}
                         color={tintColor}
                     />

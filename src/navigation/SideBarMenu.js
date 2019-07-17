@@ -1,32 +1,34 @@
 import { Ionicons } from '@expo/vector-icons';
+
 import React, { Component } from 'react';
+
 import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity } from 'react-native';
-import { Icon } from 'react-native-elements';
-const headerDrawer = require('../assets/images/profile.jpg');
 
 import { DrawerItems } from 'react-navigation';
 
+const headerDrawer = require('../assets/images/profile.jpg');
+
 export default class SideBarMenu extends Component {
-    
+
     render() {
         return (
             <View>
-                <View style={{flexDirection:'row',}}>
-                  <ImageBackground source={headerDrawer} style={{width: '100%', height: '100%'}}>
-                  <TouchableOpacity >
-                  <View>
-                    <Image
-                    source={{uri: 'https://ss-images.catscdn.vn/2019/04/22/5029254/3561716420480213454575853861059020806684672n-15510057259571546306615.jpg'}}
-                    style={styles.sideMenuProfileIcon}
-                    />
-                  </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity >          
-                    <View style={{margin:20, marginTop:0, marginBottom:5}}>
-                    <Text>Admin</Text>  
-                    </View>
-                  </TouchableOpacity>
-                  </ImageBackground>
+                <View style={{ flexDirection: 'row', }}>
+                    <ImageBackground source={headerDrawer} style={{ width: '100%', height: '100%' }}>
+                        <TouchableOpacity >
+                            <View>
+                                <Image
+                                    source={{ uri: 'https://ss-images.catscdn.vn/2019/04/22/5029254/3561716420480213454575853861059020806684672n-15510057259571546306615.jpg' }}
+                                    style={styles.sideMenuProfileIcon}
+                                />
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity >
+                            <View style={{ margin: 20, marginTop: 0, marginBottom: 5 }}>
+                                <Text style={{ color: 'white' }}>Admin</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </ImageBackground>
                 </View>
 
                 <View>
@@ -36,7 +38,7 @@ export default class SideBarMenu extends Component {
                 <TouchableOpacity
                     style={styles.logout}
                     onPress={() => this.onLogoutPress()}>
-                    <Text style={styles.logoutText}>Log Out - touch</Text>
+                    <Text style={styles.logoutText}>Đăng xuất</Text>
                     <Ionicons
                         name='ios-log-out'
                         size={28}
@@ -82,14 +84,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     sideMenuContainer: {
-      width: '100%',
-      height: '100%',
+        width: '100%',
+        height: '100%',
     },
     sideMenuProfileIcon: {
-      width: 90,
-      height: 90,
-      borderRadius: 45,
-      margin:10,
-      marginTop:30
+        width: 90,
+        height: 90,
+        borderRadius: 45,
+        margin: 10,
+        marginTop: 30
     },
 });
