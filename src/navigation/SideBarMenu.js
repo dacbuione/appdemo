@@ -35,8 +35,7 @@ export default class SideBarMenu extends Component {
 
                 <TouchableOpacity
                     style={styles.logout}
-                    onPress={() => this.onLogoutPress()}
-                >
+                    onPress={() => this.onLogoutPress()}>
                     <Text style={styles.logoutText}>Log Out - touch</Text>
                     <Ionicons
                         name='ios-log-out'
