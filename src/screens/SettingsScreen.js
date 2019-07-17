@@ -94,10 +94,6 @@ export default class SettingsScreen extends Component {
         )
     }
 }
-SettingsScreen.navigationOptions = {
-    header: null,
-  };
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,

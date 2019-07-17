@@ -1,28 +1,34 @@
+import React, { Component } from 'react';
+
+import { View, Text } from 'react-native';
+
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-import AppNavigator from './src/navigation/AppNavigator';
+
+import MainDrawerBar from './src/navigation/MainDrawerBar';
 import ForgetPassScreen from './src/screens/ForgetPassScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SplashScreen from './src/screens/SplashScreen';
 
 
+
 const login = createStackNavigator({
-  Login: { screen: LoginScreen },
-  ForgetPass: { screen: ForgetPassScreen }
+    Login: { screen: LoginScreen },
+    ForgetPass: { screen: ForgetPassScreen }
 },
-  {
-    navigationOptions: ({ header: null })
-  })
+    {
+        navigationOptions: ({ header: null })
+    })
 
 const main = createStackNavigator({
-  Main: {
-    screen: AppNavigator,
-    navigationOptions: ({ navigation }) => ({ header: null })
-  }
+    Main: {
+        screen: MainDrawerBar,
+        navigationOptions: ({ navigation }) => ({ header: null })
+    }
 },
-  {
-    navigationOptions: ({ header: null })
-  }
+    {
+        navigationOptions: ({ header: null })
+    }
 )
 
 const myApp = createStackNavigator({
@@ -33,5 +39,4 @@ const myApp = createStackNavigator({
   {
     initialRouteName: 'splashScreen'
   })
-
 export default createAppContainer(myApp);
