@@ -13,6 +13,10 @@ const headerDrawer = require('../assets/images/profile.jpg');
 // const TOKEN = 'TOKEN';
 export default class ProfileScreen extends Component {
     
+    static navigationOptions = {
+        header: null
+    };
+    
     render() {
         return (
             <View style={styles.container}>

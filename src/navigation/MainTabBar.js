@@ -122,6 +122,7 @@ const tabNav = createBottomTabNavigator({
             },
             activeTintColor: '#008B8B',
             inactiveTintColor: '#c0c0c0',
+            showLabel: false,
         }
     })
 

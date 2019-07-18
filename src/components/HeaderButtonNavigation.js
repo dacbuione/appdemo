@@ -4,24 +4,19 @@ import React, { Component } from 'react';
 
 import { View, TouchableOpacity } from 'react-native';
 
-
-
 export default class HeaderButtonNavigation extends Component {
     toggleDrawer = () => {
-        //Props to open/close the drawer
         this.props.navigationProps.toggleDrawer();
     };
     render() {
         return (
-            <View style={{ flexDirection: 'row', padding: 10 }}>
-                <TouchableOpacity onPress={() => this.toggleDrawer()}>
+                <TouchableOpacity onPress={() => this.toggleDrawer()}  style={{ flexDirection: 'row', marginLeft: 5, paddingRight:50, }}>
                     <Ionicons
-                        name='md-menu'
-                        size={35}
+                        name='ios-menu'
+                        size={30}
                         color='black'
                     />
                 </TouchableOpacity>
-            </View>
         );
     }
 }
