@@ -10,13 +10,16 @@ export default class HeaderButtonNavigation extends Component {
     };
     render() {
         return (
-                <TouchableOpacity onPress={() => this.toggleDrawer()}  style={{ flexDirection: 'row', marginLeft: 5, paddingRight:50, }}>
-                    <Ionicons
-                        name='ios-menu'
-                        size={30}
-                        color='black'
-                    />
-                </TouchableOpacity>
+            <TouchableOpacity
+                style={{ flexDirection: 'row', marginLeft: 5, paddingRight: 50, }}
+                onPress={() => this.toggleDrawer()}
+            >
+                <Ionicons
+                    name='ios-menu'
+                    size={30}
+                    color='black'
+                />
+            </TouchableOpacity>
         );
     }
 }

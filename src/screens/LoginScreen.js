@@ -46,6 +46,7 @@ export default class LoginScreen extends React.Component {
                                 <TextInput
                                     style={styles.inputText}
                                     placeholder='Email'
+                                    keyboardType='email-address'
                                     placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                                     underlineColorAndroid='transparent'
                                 />
@@ -60,7 +61,7 @@ export default class LoginScreen extends React.Component {
                             <View style={styles.inputContainer}>
                                 <TextInput
                                     style={styles.inputText}
-                                    placeholder='Password'
+                                    placeholder='Mật khẩu'
                                     secureTextEntry={true}
                                     placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                                     underlineColorAndroid='transparent'
