@@ -2,6 +2,8 @@ import { Ionicons } from '@expo/vector-icons';
 
 import React, { Component } from 'react';
 
+import { encode } from "base-64";
+
 import {
     StyleSheet,
     View,
@@ -26,10 +28,53 @@ export default class LoginScreen extends React.Component {
         header: null
     };
 
-    state = {
-        checked: false,
-        language: false,
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            loading: false,
+            errorMessage: null
+        };
     };
+
+    _login = async () => {
+
+        let base64 = require('base-64');
+        let email = this.state.email;
+        let password = this.state.password;
+
+        this.setState({ errorMessage: '', loadding: true })
+
+        let formData = new FormData();
+        formData.append('_operation', 'Ping');
+
+        if (email.length == 0 || password.length == 0) {
+            this.setState({ errorMessage: 'Email và mật khẩu không được để trống!', loadding: false });
+        }
+        else {
+            fetch('http://113.176.195.221:8081/ircrm/modules/CustomerPortal/api.php', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Basic ' + base64.encode(email + ":" + password),
+                },
+                body: formData
+            })
+                .then((response) => response.json())
+                .then((resData) => {
+                    if (resData.success === true) {
+                        this.setState({ errorMessage: '', loadding: false });
+                        this.props.navigation.navigate('mainStack')
+                    }
+                    else {
+                        this.setState({ errorMessage: 'Nhập sai email hoặc mật khẩu!', loadding: false });
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                })
+        }
+    }
 
     render() {
         return (
@@ -49,6 +94,9 @@ export default class LoginScreen extends React.Component {
                                     keyboardType='email-address'
                                     placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                                     underlineColorAndroid='transparent'
+
+                                    onChangeText={(email) => this.setState({ email })}
+                                    value={this.state.email}
                                 />
                                 <Ionicons
                                     name='md-mail'
@@ -65,6 +113,9 @@ export default class LoginScreen extends React.Component {
                                     secureTextEntry={true}
                                     placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                                     underlineColorAndroid='transparent'
+
+                                    onChangeText={(password) => this.setState({ password })}
+                                    value={this.state.password}
                                 />
                                 <Ionicons name='md-lock'
                                     size={28}
@@ -84,11 +135,11 @@ export default class LoginScreen extends React.Component {
                                     <Picker.Item label="ES Spanish" />
                                 </Picker>
                             </View> */}
-
+                            <Text style={{ color: 'red', fontSize: 16 }}>{this.state.errorMessage}</Text>
                             <View>
                                 <TouchableOpacity
                                     style={styles.buttonLogin}
-                                    onPress={() => { this.props.navigation.navigate('Main') }}
+                                    onPress={() => { this._login() }}
                                 >
                                     <Text style={styles.textLogin}> Đăng nhập </Text>
                                 </TouchableOpacity>
