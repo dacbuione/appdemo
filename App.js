@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { View, Text } from 'react-native';
+import { View, Text, navigateBack } from 'react-native';
 
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
@@ -8,6 +8,10 @@ import MainTabBar from './src/navigation/MainTabBar';
 import ForgetPassScreen from './src/screens/ForgetPassScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SplashScreen from './src/screens/SplashScreen';
+import SettingAccount from './src/screens/SettingAccount';
+import ChangePassScreen from './src/screens/ChangePassScreen';
+import ChangeInfoScreen from './src/screens/ChangeInfoScreen';
+
 
 
 
@@ -33,7 +37,10 @@ const main = createStackNavigator({
 const myApp = createStackNavigator({
   splashScreen:{screen: SplashScreen},
   loginStack: { screen: login },
-  mainStack: { screen: main }
+  mainStack: { screen: main },
+  settingAccount: {screen:SettingAccount},
+  changePass:{screen:ChangePassScreen},
+  changeInfo:{screen:ChangeInfoScreen},
 },
   {
     initialRouteName: 'splashScreen'

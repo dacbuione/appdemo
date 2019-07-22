@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 
 import {Card, CardItem, Text } from 'native-base';
 
-import { View, TouchableOpacity , StyleSheet, ImageBackground, Image} from 'react-native';
-
-import { ScrollView } from 'react-native-gesture-handler';
-
+import { View, TouchableOpacity , StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
+import {} from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const headerDrawer = require('../assets/images/profile.jpg');
 
-// const TOKEN = 'TOKEN';
+
 export default class ProfileScreen extends Component {
     
     static navigationOptions = {
@@ -90,9 +88,9 @@ export default class ProfileScreen extends Component {
                                 <Text>Quyền riêng tư & Điều khoản</Text>
                             </CardItem>
                             </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => { this.props.navigation.navigate('settingAccount') }}>
                             <CardItem style={styles.carditem}>
-                                <Icon name='gear'color='#008080' size={30} style ={{marginRight:20}} />
+                                <Icon name='gear'color='black' size={30} style ={{marginRight:20}} />
                                 <Text>Cài đặt tài khoản</Text>
                             </CardItem>
                             </TouchableOpacity>

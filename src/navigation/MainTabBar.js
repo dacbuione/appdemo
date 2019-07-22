@@ -20,7 +20,7 @@ const Home = createStackNavigator({
             title: 'Trang chủ',
             headerLeft: <HeaderButton navigationProps={navigation} />,
             headerStyle: {
-                backgroundColor: '#4ECDC4',
+                backgroundColor: '#4267b2',
                 elevation: 0,
                 showdownOpacity: 0
             }
@@ -35,9 +35,7 @@ const Setting = createStackNavigator({
             title: 'Cài đặt',
             headerLeft: <HeaderButton navigationProps={navigation} />,
             headerStyle: {
-                backgroundColor: '#4ECDC4',
-                elevation: 0,
-                showdownOpacity: 0
+                backgroundColor: '#4267b2',
             }
         })
     }
@@ -51,7 +49,7 @@ const Profile = createStackNavigator({
             title: 'Tôi',
             headerLeft: <HeaderButton navigationProps={navigation} />,
             headerStyle: {
-                backgroundColor: '#4ECDC4',
+                backgroundColor: '#4267b2',
                 elevation: 0,
                 showdownOpacity: 0
             }
@@ -117,7 +115,7 @@ const tabNav = createBottomTabNavigator({
             style: {
                 backgroundColor: 'white',
             },
-            activeTintColor: '#008B8B',
+            activeTintColor: 'red',
             inactiveTintColor: '#c0c0c0',
             showLabel: false,
         }

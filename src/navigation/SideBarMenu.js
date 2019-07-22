@@ -37,7 +37,7 @@ export default class SideBarMenu extends Component {
 
                 <TouchableOpacity
                     style={styles.logout}
-                    onPress={() => this.onLogoutPress()}>
+                    onPress={() => this.props.navigation.navigate('loginStack')}>
                     <Text style={styles.logoutText}>Đăng xuất</Text>
                     <Ionicons
                         name='ios-log-out'
