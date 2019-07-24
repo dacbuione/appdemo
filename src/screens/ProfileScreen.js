@@ -3,17 +3,75 @@ import React, { Component } from 'react';
 import {Card, CardItem, Text } from 'native-base';
 
 import { View, TouchableOpacity , StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
-import {} from 'react-navigation';
+import {navigation} from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { encode, base64 } from "base-64";
 
 const headerDrawer = require('../assets/images/profile.jpg');
-
+const email = navigation.getParam('email', 'NO-ID');
+const password = navigation.getParam('password', 'some default value');
 
 export default class ProfileScreen extends Component {
     
     static navigationOptions = {
         header: null
     };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            phone:'',
+            email:'',
+            errorMessage: '',
+            loadding: true 
+        }
+    }
+    _test(){
+    }
+
+
+    _profile() {
+        //POST json
+        var details = {
+                    '_operation': 'FetchProfile'
+                }
+    
+        //making data to send on server
+        var formBody = [];
+        for (var key in details) {
+          var encodedKey = encodeURIComponent(key);
+          var encodedValue = encodeURIComponent(details[key]);
+          formBody.push(encodedKey + '=' + encodedValue);
+        }
+        formBody = formBody.join('&');
+        let base64 = require('base-64');
+    
+        //POST request
+        fetch('http://113.176.195.221:8081/ircrm/modules/CustomerPortal/api.php', {
+          method: 'POST', //Request Type
+          body: formBody, //post body
+          headers: {
+            //Header Defination
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            'Authorization': 'Basic ' + base64.encode(email + ":" + password),
+          },
+        })
+          .then(response => response.json())
+          //If response is in json then in success
+          .then(responseJson => {
+            alert(JSON.stringify(responseJson));
+            console.log(responseJson);
+            console.warn(email);
+
+          })
+          //If response is not in json then in error
+          .catch(error => {
+            alert(JSON.stringify(error));
+            console.error(error);
+          });
+      }
+    
     
     render() {
         return (
@@ -27,13 +85,13 @@ export default class ProfileScreen extends Component {
                             style={styles.sideMenuProfile}
                             />
                         </View>
-                        <Text style={{color:'#fff',marginTop:12}}>Admin</Text>
+                        <Text style={{color:'#fff',marginTop:12}}></Text>
                 </ImageBackground>
 
                 <View style={styles.bottom}>
                     <ScrollView>
                         <Card style={{marginTop:20,marginBottom:15}}>
-                            <TouchableOpacity>
+                            <TouchableOpacity  onPress={() => { this._profile() }}>
                             <CardItem style={styles.carditem}>
                                 <Icon name='pinterest-square'color='red' size={30} style ={{marginRight:20}} />
                                     <Text style={{flex:1}}>Tên người dùng</Text>
