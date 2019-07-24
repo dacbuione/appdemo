@@ -18,10 +18,10 @@ import {
 
 const { width: WIDTH } = Dimensions.get('window');
 const bgImage = require('../assets/images/bg.jpg');
-const logo = require('../assets/images/IRTECH.png');
+const logo = require('../assets/images/logoFast.png');
 
 
-export default class ChangePassScreen extends React.Component{
+export default class ChangePassScreen extends React.Component {
 
     static navigationOptions = {
         title: 'Đổi mật khẩu',
@@ -30,15 +30,60 @@ export default class ChangePassScreen extends React.Component{
         }
     };
 
-    render(){
-        return(
+    constructor(props) {
+        super(props);
+        this.state = {
+            oldPass: '',
+            newPass: '',
+            newPassConfirm: '',
+            loading: false,
+            errorMessage: null
+        }
+    }
+
+    _changePass = () => {
+        let oldPass = this.state.oldPass;
+        let newPass = this.state.newPass;
+        let newPassConfirm = this.state.newPassConfirm;
+
+        this.setState({ errorMessage: '', loadding: true })
+
+        let formData = new FormData();
+        formData.append('_operation', 'ChangePassword');
+        formData.append('password', '');
+        formData.append('newPassword', );
+
+        if (oldPass.length == 0 || newPass.length == 0 || newPassConfirm.length == 0) {
+            this.setState({ errorMessage: 'Bạn phải điền đầy đủ các trường!', loadding: false })
+        }
+        else{
+            if (newPass !== newPassConfirm) {
+                this.setState({ errorMessage: 'Mật khẩu không khớp!', loadding: false })
+            }
+            else {
+                fetch('http://113.176.195.221:8081/ircrm/modules/CustomerPortal/api.php', {
+                    method:'POST',
+                    headers:'',
+                    body: formData
+                })
+                .then((response) => response.json())
+                .then((resData) => {
+                    console.warn(resData)
+                })
+            }
+        }
+
+    }
+
+    render() {
+        return (
             <ScrollView horizontal={false}>
                 <KeyboardAvoidingView behavior="padding" enabled>
                     <ImageBackground source={bgImage} style={styles.backgroundContainer}>
                         <View style={styles.container}>
-                            <View style={styles.logoContainer}>
+
                                 <Image source={logo} style={styles.logo} />
-                            </View>
+
                             <View style={styles.inputContainer}>
                                 <TextInput
                                     style={styles.inputText}
@@ -46,6 +91,9 @@ export default class ChangePassScreen extends React.Component{
                                     secureTextEntry={true}
                                     placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                                     underlineColorAndroid='transparent'
+
+                                    onChangeText={(oldPass) => this.setState({ oldPass })}
+                                    value={this.state.oldPass}
                                 />
                                 <Ionicons name='md-lock'
                                     size={28}
@@ -60,6 +108,9 @@ export default class ChangePassScreen extends React.Component{
                                     secureTextEntry={true}
                                     placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                                     underlineColorAndroid='transparent'
+
+                                    onChangeText={(newPass) => this.setState({ newPass })}
+                                    value={this.state.newPass}
                                 />
                                 <Ionicons name='md-lock'
                                     size={28}
@@ -74,6 +125,9 @@ export default class ChangePassScreen extends React.Component{
                                     secureTextEntry={true}
                                     placeholderTextColor={'rgba(255, 255, 255, 0.7)'}
                                     underlineColorAndroid='transparent'
+
+                                    onChangeText={(newPassConfirm) => this.setState({ newPassConfirm })}
+                                    value={this.state.newPassConfirm}
                                 />
                                 <Ionicons name='md-lock'
                                     size={28}
@@ -81,13 +135,15 @@ export default class ChangePassScreen extends React.Component{
                                     style={styles.inputIcon}
                                 />
                             </View>
+                            <Text style={{ color: 'red', fontSize: 16 }}>{this.state.errorMessage}</Text>
                             <View>
                                 <TouchableOpacity
                                     style={styles.btnChangepass}
-                                    onPress={() => alert('Đổi mật khẩu thành công!')}>
+                                    onPress={() => this._changePass()}
+                                >
                                     <Text style={styles.textLogin}> Đổi mật khẩu </Text>
                                 </TouchableOpacity>
-                            </View>    
+                            </View>
                         </View>
                     </ImageBackground>
                 </KeyboardAvoidingView>
@@ -109,14 +165,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    logoContainer: {
-        marginTop:-30,
-        alignItems: 'center',
-        marginBottom: 50
-    },
     logo: {
-        width: 150,
-        height: 90,
+        width: WIDTH - 50,
+        height: 95,
+        marginBottom: 80,
     },
     logoText: {
         fontSize: 20,

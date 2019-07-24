@@ -1,6 +1,4 @@
 import { Ionicons } from '@expo/vector-icons';
-import Icon from 'react-native-vector-icons/FontAwesome';
-
 
 import React, { Component } from 'react';
 
@@ -17,10 +15,12 @@ import {
     ImageBackground,
 } from 'react-native';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 const { width: WIDTH } = Dimensions.get('window');
 const bgImage = require('../assets/images/bg.jpg');
-const logo = require('../assets/images/IRTECH.png');
+const logo = require('../assets/images/logoFast.png');
 
 
 export default class ChangeInfoScreen extends React.Component{
@@ -45,9 +45,9 @@ export default class ChangeInfoScreen extends React.Component{
                 <KeyboardAvoidingView behavior="padding" enabled>
                     <ImageBackground source={bgImage} style={styles.backgroundContainer}>
                         <View style={styles.container}>
-                            <View style={styles.logoContainer}>
+                            
                                 <Image source={logo} style={styles.logo} />
-                            </View>
+
                             <View style={styles.inputContainer}>
                                 <TextInput
                                     style={styles.inputText}
@@ -118,14 +118,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    logoContainer: {
-        marginTop:-30,
-        alignItems: 'center',
-        marginBottom: 50
-    },
     logo: {
-        width: 150,
-        height: 90,
+        width: WIDTH - 50,
+        height: 95,
+        marginBottom: 80,
     },
     logoText: {
         fontSize: 20,

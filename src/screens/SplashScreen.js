@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import { StyleSheet, View, Text, Image, Animated, Dimensions } from 'react-native';
 
-const logo = require('../assets/images/IRTECH.png');
+const logo = require('../assets/images/logoFast.png');
 var { height, width } = Dimensions.get('window')
 
 export default class SplashScreen extends Component {
@@ -44,7 +44,7 @@ export default class SplashScreen extends Component {
                     style={{ ...styles.logo, opacity: this.state.logoOpacity }}>
                 </Animated.Image>
                 <Animated.Text style={{ ...styles.title, marginTop: this.state.titleMarginTop }}>
-                    IRTECH
+                    CUSTOMER PORTAL
                 </Animated.Text>
             </View>
         );
@@ -59,14 +59,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     logo: {
-        width: 301,
-        height: 178,
+        width: Dimensions.get('window').width - 50,
+        height: 95,
     },
     title: {
         textAlign: 'center',
-        fontSize: 35,
+        fontSize: 30,
         fontWeight: 'bold',
         marginTop: 10,
-        color: '#6AC8C9'
+        color: '#00B6BC'
     }
 });

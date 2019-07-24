@@ -5,15 +5,13 @@ import { View, Text, navigateBack } from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import MainTabBar from './src/navigation/MainTabBar';
+import ChangeInfoScreen from './src/screens/ChangeInfoScreen';
+import ChangePassScreen from './src/screens/ChangePassScreen';
+import CreateTicketScreen from './src/screens/CreateTicketScreen';
 import ForgetPassScreen from './src/screens/ForgetPassScreen';
 import LoginScreen from './src/screens/LoginScreen';
-import SplashScreen from './src/screens/SplashScreen';
 import SettingAccount from './src/screens/SettingAccount';
-import ChangePassScreen from './src/screens/ChangePassScreen';
-import ChangeInfoScreen from './src/screens/ChangeInfoScreen';
-
-
-
+import SplashScreen from './src/screens/SplashScreen';
 
 const login = createStackNavigator({
     Login: { screen: LoginScreen },
@@ -41,6 +39,7 @@ const myApp = createStackNavigator({
   settingAccount: {screen:SettingAccount},
   changePass:{screen:ChangePassScreen},
   changeInfo:{screen:ChangeInfoScreen},
+  createTicket:{screen: CreateTicketScreen}
 },
   {
     initialRouteName: 'splashScreen'
