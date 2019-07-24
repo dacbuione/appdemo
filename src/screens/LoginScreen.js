@@ -64,7 +64,10 @@ export default class LoginScreen extends React.Component {
             .then((resData) => {
                 if (resData.success === true) {
                     this.setState({ errorMessage: '', loadding: false });
-                    this.props.navigation.navigate('mainStack')
+                    this.props.navigation.navigate('mainStack',{
+                            email: this.state.email,
+                            password: this.state.password,
+                          });
                 }
                 else {
                     this.setState({ errorMessage: 'Nhập sai email hoặc mật khẩu!', loadding: false });
