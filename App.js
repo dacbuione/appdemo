@@ -44,4 +44,4 @@ const myApp = createStackNavigator({
   {
     initialRouteName: 'splashScreen'
   })
-export default createAppContainer(myApp);
+export default createAppContainer(myApp); 
