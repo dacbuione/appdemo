@@ -1,9 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
-
 import React, { Component } from 'react';
-
-import { encode } from "base-64";
-
 import {
     StyleSheet,
     View,
@@ -15,12 +11,14 @@ import {
     TouchableOpacity,
     ScrollView,
     KeyboardAvoidingView,
-    ImageBackground
+    ImageBackground,
+    AsyncStorage,
+    Keyboard
 } from 'react-native';
 
 const { width: WIDTH } = Dimensions.get('window');
 const bgImage = require('../assets/images/bg.jpg');
-const logo = require('../assets/images/logoFast.png');
+const logo = require('../assets/images/IRTECH.png');
 
 export default class LoginScreen extends React.Component {
 
@@ -37,8 +35,9 @@ export default class LoginScreen extends React.Component {
             errorMessage: null
         };
     };
+   
 
-    _login = async () => {
+    _login = () => {
 
         let base64 = require('base-64');
         let email = this.state.email;
@@ -53,29 +52,40 @@ export default class LoginScreen extends React.Component {
             this.setState({ errorMessage: 'Email và mật khẩu không được để trống!', loadding: false });
         }
         else {
-        fetch('http://113.176.195.221:8081/ircrm/modules/CustomerPortal/api.php', {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Basic ' + base64.encode(email + ":" + password),
-            },
-            body: formData
-        })
-            .then((response) => response.json())
-            .then((resData) => {
-                if (resData.success === true) {
-                    this.setState({ errorMessage: '', loadding: false });
-                    this.props.navigation.navigate('mainStack',{
-                            email: this.state.email,
-                            password: this.state.password,
-                          });
-                }
-                else {
-                    this.setState({ errorMessage: 'Nhập sai email hoặc mật khẩu!', loadding: false });
-                }
+            fetch('http://113.176.195.221:8081/ircrm/modules/CustomerPortal/api.php', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Basic ' + base64.encode(email + ":" + password),
+                },
+                body: formData
             })
-            .catch((error) => {
-                console.error(error);
-            })
+                .then((response) => response.json())
+                .then((resData) => {
+                    if (resData.success === true) {
+                        this.setState({ errorMessage: '', loadding: false });
+                        this.props.navigation.navigate('mainStack')
+                        const{email,password} = this.state;
+                    
+                        //save data with asnycStorage
+                    
+                        let myArray = {
+                            email: email,
+                            password: password,
+                        }
+                        AsyncStorage.setItem('myArray',
+                        
+                        JSON.stringify(myArray));
+                    
+                        Keyboard.dismiss();
+                        console.log(email + ' ' + password);
+                    }
+                    else {
+                        this.setState({ errorMessage: 'Nhập sai email hoặc mật khẩu!', loadding: false });
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                })
         }
     }
 
@@ -86,7 +96,9 @@ export default class LoginScreen extends React.Component {
                     <ImageBackground source={bgImage} style={styles.backgroundContainer}>
                         <View style={styles.container}>
 
-                            <Image source={logo} style={styles.logo} />
+                            <View style={styles.logoContainer}>
+                                <Image source={logo} style={styles.logo} />
+                            </View>
 
                             <View style={styles.inputContainer}>
                                 <TextInput
@@ -166,7 +178,6 @@ const styles = StyleSheet.create({
     container: {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -176,10 +187,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    logoContainer: {
+        alignItems: 'center',
+        marginBottom: 70
+    },
     logo: {
-        width: WIDTH - 50,
-        height: 95,
-        marginBottom: 80,
+        width: 150,
+        height: 90,
     },
     logoText: {
         fontSize: 20,
