@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 
 import {Card, CardItem, Text } from 'native-base';
 
-import { View, TouchableOpacity , StyleSheet, ImageBackground, Image, ScrollView} from 'react-native';
-import {navigation} from 'react-navigation';
+import { View, TouchableOpacity , StyleSheet, ImageBackground, Image, ScrollView, AsyncStorage} from 'react-native';
+import {} from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { encode, base64 } from "base-64";
-
 const headerDrawer = require('../assets/images/profile.jpg');
-const email = navigation.getParam('email', 'NO-ID');
-const password = navigation.getParam('password', 'some default value');
+
+
 
 export default class ProfileScreen extends Component {
     
@@ -20,19 +19,23 @@ export default class ProfileScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            phone:'',
             email:'',
+            password:'',
             errorMessage: '',
-            loadding: true 
+            loadding: true
         }
     }
-    _test(){
+    async componentWillMount(){
+        const value = await AsyncStorage.getItem('myArray');
+        const value1 = JSON.parse(value);
+        this.setState({
+            email:value1.email,
+            password: value1.password,
+        })
     }
-
-
-    _profile() {
-        //POST json
+    
+    componentDidMount(){
+        //call API profile manager portal
         var details = {
                     '_operation': 'FetchProfile'
                 }
@@ -40,37 +43,38 @@ export default class ProfileScreen extends Component {
         //making data to send on server
         var formBody = [];
         for (var key in details) {
-          var encodedKey = encodeURIComponent(key);
-          var encodedValue = encodeURIComponent(details[key]);
-          formBody.push(encodedKey + '=' + encodedValue);
+            var encodedKey = encodeURIComponent(key);
+            var encodedValue = encodeURIComponent(details[key]);
+            formBody.push(encodedKey + '=' + encodedValue);
         }
         formBody = formBody.join('&');
         let base64 = require('base-64');
+        let email = this.state.email
+        let password = this.state.password
     
         //POST request
         fetch('http://113.176.195.221:8081/ircrm/modules/CustomerPortal/api.php', {
-          method: 'POST', //Request Type
-          body: formBody, //post body
-          headers: {
+            method: 'POST', //Request Type
+            body: formBody, //post body
+            headers: {
             //Header Defination
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
             'Authorization': 'Basic ' + base64.encode(email + ":" + password),
-          },
+            },
         })
-          .then(response => response.json())
-          //If response is in json then in success
-          .then(responseJson => {
+            .then(response => response.json())
+            //If response is in json then in success
+            .then(responseJson => {
             alert(JSON.stringify(responseJson));
             console.log(responseJson);
-            console.warn(email);
-
-          })
-          //If response is not in json then in error
-          .catch(error => {
+            })
+            //If response is not in json then in error  
+            .catch(error => {
             alert(JSON.stringify(error));
             console.error(error);
-          });
-      }
+            });
+        }
+
     
     
     render() {
@@ -91,11 +95,11 @@ export default class ProfileScreen extends Component {
                 <View style={styles.bottom}>
                     <ScrollView>
                         <Card style={{marginTop:20,marginBottom:15}}>
-                            <TouchableOpacity  onPress={() => { this._profile() }}>
+                            <TouchableOpacity >
                             <CardItem style={styles.carditem}>
                                 <Icon name='pinterest-square'color='red' size={30} style ={{marginRight:20}} />
                                     <Text style={{flex:1}}>Tên người dùng</Text>
-                                    <Text style={styles.textSize}>Admin</Text>
+                                    <Text style={styles.textSize}>{this.state.email}</Text>
                             </CardItem>
                             </TouchableOpacity>
                             <TouchableOpacity>
